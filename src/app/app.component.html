@@ -1,0 +1,37 @@
+<div class="container text-center">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <h1>QRcode PDF Generator</h1>
+      <div class="btn-group input-group">
+        <span class="input-group-text">URL</span>
+        <input
+          class="form-control"
+          type="text"
+          [(ngModel)]="url"
+          placeholder="https://www.example.com"
+        />
+        <button
+          class="form-control btn btn-primary input-group-text"
+          (click)="openPDF()"
+        >
+          Open PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #template class="container text-center" style="max-width: 450px;">
+  <qrcode
+    [qrdata]="url"
+    [margin]="2"
+    [width]="250"
+    [errorCorrectionLevel]="'M'"
+  ></qrcode>
+  {{ url }}
+</div>
+
+<ng-container *ngIf="pdf">
+  <embed [src]="pdf" width="500" height="800" />
+</ng-container>
